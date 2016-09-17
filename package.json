@@ -1,0 +1,140 @@
+{
+    "name": "tortoisesvn",
+    "displayName": "TortoiseSVN",
+    "description": "tortoisesvn is a simple extension for VSCode to use TortoiseSVN.",
+    "version": "0.0.1",
+    "publisher": "fantacytyx",
+    "author": {
+        "name": "Tang Yaxin",
+        "email": "380984620@qq.com"
+    },
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.4.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:tortoiseSVN.update",
+        "onCommand:tortoiseSVN.commit",
+        "onCommand:tortoiseSVN.log",
+        "onCommand:tortoiseSVN.revert",
+        "onCommand:tortoiseSVN.clear",
+        "onCommand:tortoiseSVN.add",
+        "onCommand:tortoiseSVN.diff",
+        "onCommand:tortoiseSVN.blame",
+        "onCommand:tortoiseSVN.lock",
+        "onCommand:tortoiseSVN.unlock"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "tortoiseSVN.update",
+                "title": "tortoiseSVN update"
+            },
+            {
+                "command": "tortoiseSVN.commit",
+                "title": "tortoiseSVN commit"
+            },
+            {
+                "command": "tortoiseSVN.log",
+                "title": "tortoiseSVN log"
+            },
+            {
+                "command": "tortoiseSVN.revert",
+                "title": "tortoiseSVN revert"
+            },
+            {
+                "command": "tortoiseSVN.clear",
+                "title": "tortoiseSVN clear"
+            },
+            {
+                "command": "tortoiseSVN.add",
+                "title": "tortoiseSVN add"
+            },
+            {
+                "command": "tortoiseSVN.diff",
+                "title": "tortoiseSVN diff"
+            },
+            {
+                "command": "tortoiseSVN.blame",
+                "title": "tortoiseSVN blame"
+            },
+            {
+                "command": "tortoiseSVN.lock",
+                "title": "tortoiseSVN lock"
+            },
+            {
+                "command": "tortoiseSVN.unlock",
+                "title": "tortoiseSVN unlock"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "tortoiseSVN.blame",
+                    "group": "tortoiseSVN"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "tortoiseSVN.update",
+                    "group": "tortoiseSVN"
+                },
+                {
+                    "command": "tortoiseSVN.commit",
+                    "group": "tortoiseSVN"
+                }
+            ]
+        },
+        "configuration": {
+            "type": "object",
+            "title": "tortoiseSVN configuration",
+            "properties": {
+                "tortoiseSVN.autoCloseUpdateDialog": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Auto close dialog when no errors, conflicts and merges."
+                },
+                "tortoiseSVN.tortoiseSVNProcExePath": {
+                    "type": "string",
+                    "default": "C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe",
+                    "description": "Specify the correct TortoiseProc path"
+                }
+            }
+        },
+        "keybindings": [
+            {
+                "command": "tortoiseSVN.update",
+                "key": "alt+s u"
+            },
+            {
+                "command": "tortoiseSVN.commit",
+                "key": "alt+s c"
+            },
+            {
+                "command": "tortoiseSVN.log",
+                "key": "alt+s l"
+            },
+            {
+                "command": "tortoiseSVN.revert",
+                "key": "alt+s r"
+            },
+            {
+                "command": "tortoiseSVN.diff",
+                "key": "alt+s d"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "typescript": "^1.8.5",
+        "vscode": "^0.11.0"
+    }
+}
