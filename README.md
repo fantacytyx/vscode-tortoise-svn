@@ -42,7 +42,7 @@ This extension contributes the following settings:
 
 ## Change Log 
 
-* [Change log](https://raw.githubusercontent.com/fantacytyx/vscode-tortoise-svn/master/CHANGELOG.md)
+[Change log](https://raw.githubusercontent.com/fantacytyx/vscode-tortoise-svn/master/CHANGELOG.md)
 
 ## Source
 

@@ -3,9 +3,9 @@
     "displayName": "TortoiseSVN",
     "description": "tortoisesvn is a simple extension for VSCode to use TortoiseSVN.",
     "version": "0.0.1",
-    "publisher": "fantacytyx",
+    "publisher": "fantasytyx",
     "author": {
-        "name": "Tang Yaxin",
+        "name": "TangYaxin",
         "email": "380984620@qq.com"
     },
     "license": "MIT",
