@@ -1,55 +1,55 @@
-# TortoiseSVN README
+#README
 
-tortoisesvn is a simple extension for VSCode to use TortoiseSVN.
+tortoise-svn is a simple extension for VSCode to use TortoiseSVN.
 
 ## Features
 
-It provides commands to open TortoiseSVN window for the workspace rootPath for update, commit, log, revert, clear, add, diff, blame, lock and unlock. 
+tortoise-svn provides commands to open TortoiseSVN window for the workspace rootPath for update, commit, log, revert, clear, add, diff, blame, lock and unlock. 
+tortoise-svn provides dropdown to select TortoiseSVN action and target dir or file.
 
 **It runs only on Windows and needs the TortoiseSVN and TortoiseSVN command line tools (TortoiseProc.exe).**
 ### add commands
 
-* tortoiseSVN.update : Open __update__ for the workspace rootPath
-* tortoiseSVN.commit : Open __commit__ for the workspace rootPath
-* tortoiseSVN.log : Open __log__ for the workspace rootPath
-* tortoiseSVN.revert : Open __revert__ for the workspace rootPath
-* tortoiseSVN.clear : Open __clear__ for the workspace rootPath
-* tortoiseSVN.add : Open __add__ for the workspace rootPath
-* tortoiseSVN.diff : Open __diff__ for the workspace rootPath
-* tortoiseSVN.blame : Open __blame__ for the workspace rootPath
-* tortoiseSVN.lock : Open __lock__ for the workspace rootPath
-* tortoiseSVN.unlock : Open __unlock__ for the workspace rootPath
+* tortoise-svn.update : Open __update__ for the workspace rootPath
+* tortoise-svn.commit : Open __commit__ for the workspace rootPath
+* tortoise-svn.log : Open __log__ for the workspace rootPath
+* tortoise-svn.revert : Open __revert__ for the workspace rootPath
+* tortoise-svn.clear : Open __clear__ for the workspace rootPath
+* tortoise-svn.add : Open __add__ for the workspace rootPath
+* tortoise-svn.diff : Open __diff__ for the workspace rootPath
+* tortoise-svn.blame : Open __blame__ for the workspace rootPath
+* tortoise-svn.lock : Open __lock__ for the workspace rootPath
+* tortoise-svn.unlock : Open __unlock__ for the workspace rootPath
+* tortoise-svn.unlock : Open __unlock__ for the workspace rootPath
+* tortoise-svn... : show __dropdown__ for to select target dir or file,then show a new  __dropdown__  to select TortoiseSVN action and
 
 ### add keybindings
 
-* `alt+s u` : "onCommand:tortoiseSVN.update"
-* `alt+s c` : "onCommand:tortoiseSVN.commit"
-* `alt+s l` : "onCommand:tortoiseSVN.log"
-* `alt+s r` : "onCommand:tortoiseSVN.revert"
-* `alt+s d` : "onCommand:tortoiseSVN.diff"
+* `alt+s u` : "onCommand:tortoise-svn.update"
+* `alt+s c` : "onCommand:tortoise-svn.commit"
+* `alt+s l` : "onCommand:tortoise-svn.log"
+* `alt+s r` : "onCommand:tortoise-svn.revert"
+* `alt+s d` : "onCommand:tortoise-svn.diff"
+* `alt+s m` : "onCommand:tortoise-svn..."
 
 ## Requirements
 
 If TortoiseSVN is not installed at `C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe`, specify the correct path
-by setting property `tortoiseSVN.tortoiseSVNProcExePath` in user `settings.json`. 
+by setting property `TortoiseSVN.tortoiseSVNProcExePath` in user `settings.json`. 
 
 ## Extension Settings
 
 This extension contributes the following settings:
 
-* `tortoiseSVN.autoCloseUpdateDialog` : enable/disable auto close dialog when no errors, conflicts and merges.
-* `tortoiseSVN.tortoiseSVNProcExePath` : specify the correct `TortoiseProc.exe` path
+* `TortoiseSVN.autoCloseUpdateDialog` : enable/disable auto close dialog when no errors, conflicts and merges.
+* `TortoiseSVN.tortoiseSVNProcExePath` : specify the correct `TortoiseProc.exe` path
 
-## Change Log 
+## Links
 
-[Change log](https://raw.githubusercontent.com/fantacytyx/vscode-tortoise-svn/master/CHANGELOG.md)
+[Change log](https://github.com/fantacytyx/vscode-tortoise-svn/blob/master/CHANGELOG.md)
 
-## Source
+[Source on GitHub](https://github.com/fantacytyx/vscode-tortoise-svn)
 
-[GitHub](https://raw.githubusercontent.com/fantacytyx/vscode-tortoise-svn)
-                
-## License
-
-[MIT](https://raw.githubusercontent.com/fantacytyx/vscode-tortoise-svn/master/LICENSE)
+[MIT](https://github.com/fantacytyx/vscode-tortoise-svn/blob/master/LICENSE)
 
 **Enjoy!**
