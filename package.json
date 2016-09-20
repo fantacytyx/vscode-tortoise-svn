@@ -28,7 +28,7 @@
     "onCommand:tortoise-svn.commit",
     "onCommand:tortoise-svn.log",
     "onCommand:tortoise-svn.revert",
-    "onCommand:tortoise-svn.clear",
+    "onCommand:tortoise-svn.cleanup",
     "onCommand:tortoise-svn.add",
     "onCommand:tortoise-svn.diff",
     "onCommand:tortoise-svn.blame",
@@ -56,8 +56,8 @@
         "title": "tortoise svn Revert in workspace"
       },
       {
-        "command": "tortoise-svn.clear",
-        "title": "tortoise svn clear in workspace"
+        "command": "tortoise-svn.cleanup",
+        "title": "tortoise svn cleanup in workspace"
       },
       {
         "command": "tortoise svn.add",

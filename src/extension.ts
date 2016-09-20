@@ -25,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
     // The commandId parameter must match the command field in package.json
     /* add command tortoiseSVN actions that only useful workspace(vscode.workspace.rootPath)*/
     let tortoiseCommand = new TortoiseCommand();
-    let actions: string[] = ['update', 'commit', 'revert', 'clear', 'log', 'add', 'diff', 'blame', 'lock', 'unlock'];
+    let actions: string[] = ['update', 'commit', 'revert', 'cleanup', 'log', 'add', 'diff', 'blame', 'lock', 'unlock'];
     actions.forEach((command) => {
         let action = command;
         let disposable = vscode.commands.registerCommand(`tortoise-svn.${command}`, () => {
