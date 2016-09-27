@@ -4,7 +4,7 @@ tortoise-svn is a simple extension for VSCode to use TortoiseSVN.
 
 ## Features
 
-tortoise-svn provides commands to open TortoiseSVN window for the workspace rootPath for update, commit, log, revert, clear, add, diff, blame, lock and unlock. 
+tortoise-svn provides commands to open TortoiseSVN window for the workspace rootPath for update, commit, log, revert, cleanup, add, diff, blame, lock and unlock. 
 tortoise-svn provides dropdown to select TortoiseSVN action and target dir or file.
 
 **It runs only on Windows and needs the TortoiseSVN and TortoiseSVN command line tools (TortoiseProc.exe).**
@@ -14,7 +14,7 @@ tortoise-svn provides dropdown to select TortoiseSVN action and target dir or fi
 * tortoise-svn.commit : Open __commit__ for the workspace rootPath
 * tortoise-svn.log : Open __log__ for the workspace rootPath
 * tortoise-svn.revert : Open __revert__ for the workspace rootPath
-* tortoise-svn.clear : Open __clear__ for the workspace rootPath
+* tortoise-svn.cleanup : Open __cleanup__ for the workspace rootPath
 * tortoise-svn.add : Open __add__ for the workspace rootPath
 * tortoise-svn.diff : Open __diff__ for the workspace rootPath
 * tortoise-svn.blame : Open __blame__ for the workspace rootPath
