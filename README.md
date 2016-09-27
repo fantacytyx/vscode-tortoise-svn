@@ -20,7 +20,6 @@ tortoise-svn provides dropdown to select TortoiseSVN action and target dir or fi
 * tortoise-svn.blame : Open __blame__ for the workspace rootPath
 * tortoise-svn.lock : Open __lock__ for the workspace rootPath
 * tortoise-svn.unlock : Open __unlock__ for the workspace rootPath
-* tortoise-svn.unlock : Open __unlock__ for the workspace rootPath
 * tortoise-svn... : show __dropdown__ for to select target dir or file,then show a new  __dropdown__  to select TortoiseSVN action and
 
 ### add keybindings
