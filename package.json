@@ -2,7 +2,7 @@
   "name": "tortoise-svn",
   "displayName": "TortoiseSVN",
   "description": "tortoise-svn is a simple extension for VSCode to use TortoiseSVN.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "fantasytyx",
   "author": {
     "name": "TangYaxin",
@@ -24,88 +24,146 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:tortoise-svn.update",
-    "onCommand:tortoise-svn.commit",
-    "onCommand:tortoise-svn.log",
-    "onCommand:tortoise-svn.revert",
-    "onCommand:tortoise-svn.cleanup",
-    "onCommand:tortoise-svn.add",
-    "onCommand:tortoise-svn.diff",
-    "onCommand:tortoise-svn.blame",
-    "onCommand:tortoise-svn.lock",
-    "onCommand:tortoise-svn.unlock",
-    "onCommand:tortoise-svn..."
+    "onCommand:workspace tortoise-svn update",
+    "onCommand:workspace tortoise-svn commit",
+    "onCommand:workspace tortoise-svn log",
+    "onCommand:workspace tortoise-svn revert",
+    "onCommand:workspace tortoise-svn cleanup",
+    "onCommand:workspace tortoise-svn add",
+    "onCommand:workspace tortoise-svn diff",
+    "onCommand:workspace tortoise-svn lock",
+    "onCommand:workspace tortoise-svn unlock",
+    "onCommand:file tortoise-svn update",
+    "onCommand:file tortoise-svn commit",
+    "onCommand:file tortoise-svn log",
+    "onCommand:file tortoise-svn revert",
+    "onCommand:file tortoise-svn cleanup",
+    "onCommand:file tortoise-svn add",
+    "onCommand:file tortoise-svn diff",
+    "onCommand:file tortoise-svn blame",
+    "onCommand:file tortoise-svn lock",
+    "onCommand:file tortoise-svn unlock",
+    "onCommand:tortoise-svn ...",
+    "onCommand:tortoise-svn ...(select path)"
   ],
   "main": "./out/src/extension",
   "contributes": {
     "commands": [
       {
-        "command": "tortoise-svn.update",
-        "title": "tortoise svn Update in workspace"
+        "command": "workspace tortoise-svn update",
+        "title": "Workspace: SVN Update"
       },
       {
-        "command": "tortoise-svn.commit",
-        "title": "tortoise svn Commit in workspace"
+        "command": "workspace tortoise-svn commit",
+        "title": "Workspace: SVN Commit"
       },
       {
-        "command": "tortoise-svn.log",
-        "title": "tortoise svn Log in workspace"
+        "command": "workspace tortoise-svn log",
+        "title": "Workspace: SVN Log"
       },
       {
-        "command": "tortoise-svn.revert",
-        "title": "tortoise svn Revert in workspace"
+        "command": "workspace tortoise-svn revert",
+        "title": "Workspace: SVN Revert"
       },
       {
-        "command": "tortoise-svn.cleanup",
-        "title": "tortoise svn cleanup in workspace"
+        "command": "workspace tortoise-svn cleanup",
+        "title": "Workspace: SVN Cleanup"
       },
       {
-        "command": "tortoise svn.add",
-        "title": "tortoise svn Add in workspace"
+        "command": "workspace tortoise-svn add",
+        "title": "Workspace: SVN Add"
       },
       {
-        "command": "tortoise-svn.diff",
-        "title": "tortoise svn Diff in workspace"
+        "command": "workspace tortoise-svn diff",
+        "title": "Workspace: SVN Diff"
       },
       {
-        "command": "tortoise-svn.blame",
-        "title": "tortoise svn Blame in workspace"
+        "command": "workspace tortoise-svn lock",
+        "title": "Workspace: SVN Lock"
       },
       {
-        "command": "tortoise-svn.lock",
-        "title": "tortoise svn Lock in workspace"
+        "command": "workspace tortoise-svn unlock",
+        "title": "Workspace: SVN Unlock"
       },
       {
-        "command": "tortoise-svn.unlock",
-        "title": "tortoise svn Unlock in workspace"
+        "command": "file tortoise-svn update",
+        "title": "File: SVN Update"
       },
       {
-        "command": "tortoise-svn...",
-        "title": "tortoise svn... (select)"
+        "command": "file tortoise-svn commit",
+        "title": "File: SVN Commit"
+      },
+      {
+        "command": "file tortoise-svn log",
+        "title": "File: SVN Log"
+      },
+      {
+        "command": "file tortoise-svn revert",
+        "title": "File: SVN Revert"
+      },
+      {
+        "command": "file tortoise-svn cleanup",
+        "title": "File: SVN Cleanup"
+      },
+      {
+        "command": "file tortoise-svn add",
+        "title": "File: SVN Add"
+      },
+      {
+        "command": "file tortoise-svn blame",
+        "title": "File: SVN Blame"
+      },
+      {
+        "command": "file tortoise-svn diff",
+        "title": "File: SVN Diff"
+      },
+      {
+        "command": "file tortoise-svn lock",
+        "title": "File: SVN Lock"
+      },
+      {
+        "command": "file tortoise-svn unlock",
+        "title": "File: SVN Unlock"
+      },
+      {
+        "command": "tortoise-svn ...",
+        "title": "SVN ... (Select Action)"
+      },
+      {
+        "command": "tortoise-svn ...(select path)",
+        "title": "SVN ... (Select Path)"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "command": "tortoise-svn.update",
+          "command": "workspace tortoise-svn update",
           "group": "tortoise-svn"
         },
         {
-          "command": "tortoise-svn.commit",
+          "command": "workspace tortoise-svn commit",
           "group": "tortoise-svn"
         },
         {
-          "command": "tortoise-svn.log",
-          "group": "tortoise-svn"
-        },
-        {
-          "command": "tortoise-svn...",
+          "command": "tortoise-svn ...",
           "group": "tortoise-svn"
         }
       ],
       "editor/context": [
         {
-          "command": "tortoise-svn...",
+          "command": "workspace tortoise-svn update",
+          "group": "tortoise-svn"
+        },
+        {
+          "command": "workspace tortoise-svn commit",
+          "group": "tortoise-svn"
+        },
+        {
+          "command": "tortoise-svn ...",
+          "group": "tortoise-svn"
+        },
+        {
+          "command": "tortoise-svn ...(select path)",
           "group": "tortoise-svn"
         }
       ]
@@ -128,27 +186,55 @@
     },
     "keybindings": [
       {
-        "command": "tortoise-svn.update",
+        "command": "workspace tortoise-svn add",
+        "key": "alt+s a"
+      },
+      {
+        "command": "workspace tortoise-svn update",
         "key": "alt+s u"
       },
       {
-        "command": "tortoise-svn.commit",
+        "command": "workspace tortoise-svn commit",
         "key": "alt+s c"
       },
       {
-        "command": "tortoise-svn.log",
+        "command": "workspace tortoise-svn log",
         "key": "alt+s l"
       },
       {
-        "command": "tortoise-svn.revert",
+        "command": "workspace tortoise-svn revert",
         "key": "alt+s r"
       },
       {
-        "command": "tortoise-svn.diff",
+        "command": "workspace tortoise-svn diff",
         "key": "alt+s d"
+      },      
+      {
+        "command": "file tortoise-svn add",
+        "key": "alt+s a",
+        "when": "editorFocus"
       },
       {
-        "command": "tortoise-svn...",
+        "command": "file tortoise-svn log",
+        "key": "alt+s l",
+        "when": "editorFocus"
+      },
+      {
+        "command": "file tortoise-svn revert",
+        "key": "alt+s r",
+        "when": "editorFocus"
+      },
+      {
+        "command": "file tortoise-svn diff",
+        "key": "alt+s d",
+        "when": "editorFocus"
+      },
+      {
+        "command": "tortoise-svn ...",
+        "key": "alt+s s"
+      },
+      {
+        "command": "tortoise-svn ...(select path)",
         "key": "alt+s m"
       }
     ]

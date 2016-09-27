@@ -4,14 +4,24 @@
 import * as vscode from 'vscode';
 import * as child_process from 'child_process';
 import * as path from 'path';
+import * as fs from 'fs';
 import * as glob from 'glob';
 
-interface ActionQuickPickItem extends vscode.QuickPickItem {
-    action: string
+const DIRECTORY_ACTIONS: string[] = ['update', 'commit', 'revert', 'cleanup', 'log', 'add', 'diff', 'lock', 'unlock'];
+const FILE_ACTIONS: string[] = ['update', 'commit', 'revert', 'cleanup', 'log', 'add', 'blame', 'diff', 'lock', 'unlock'];
+
+interface SvnQuickPickItem extends vscode.QuickPickItem {
+    action?: string;
+    path: string;
 }
-interface QuickPickItemForPath extends vscode.QuickPickItem {
-    isDir: boolean
+
+interface UriInfo extends vscode.Uri {
+    path: string;
+    isDirectory: boolean;
+    isFile: boolean;
+    getActionQuickPickItem(): SvnQuickPickItem[];
 }
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -25,44 +35,67 @@ export function activate(context: vscode.ExtensionContext) {
     // The commandId parameter must match the command field in package.json
     /* add command tortoiseSVN actions that only useful workspace(vscode.workspace.rootPath)*/
     let tortoiseCommand = new TortoiseCommand();
-    let actions: string[] = ['update', 'commit', 'revert', 'cleanup', 'log', 'add', 'diff', 'blame', 'lock', 'unlock'];
-    actions.forEach((command) => {
-        let action = command;
-        let disposable = vscode.commands.registerCommand(`tortoise-svn.${command}`, () => {
+    DIRECTORY_ACTIONS.forEach((action) => {
+        let disposable = vscode.commands.registerCommand(`workspace tortoise-svn ${action}`, () => {
             tortoiseCommand.exec(action, vscode.workspace.rootPath);
         });
 
         context.subscriptions.push(disposable);
     });
 
+    FILE_ACTIONS.forEach((action) => {
+        let disposable = vscode.commands.registerCommand(`file tortoise-svn ${action}`, () => {
+            let path: string = vscode.window.activeTextEditor && vscode.window.activeTextEditor.document.uri.fsPath;
+            if (!path) {
+                vscode.window.showWarningMessage('only can be used when open a file on text editor');
+                return;
+            } else {
+                tortoiseCommand.exec(action, path);
+            }
+        });
+
+        context.subscriptions.push(disposable);
+    });
+
     /* add command tortoise-svn... that need something choose*/
-    let actionQuickPickItems = actions.map(action => {
+    let actionQuickPickItems = FILE_ACTIONS.map(action => {
         return {
-            label: 'svn: ' + action,
+            label: 'svn ' + action,
             description: '',
             action: action
         };
     });
-    let disposableNeedChoose = vscode.commands.registerCommand('tortoise-svn...', () => {
+    let disposableNeedChoose = vscode.commands.registerCommand('tortoise-svn ...', (uri: vscode.Uri) => {
+        let uriInfo = new UriInfo(uri);
+        var actionQuickPickItems = uriInfo.getActionQuickPickItem()
+        vscode.window.showQuickPick<SvnQuickPickItem>(actionQuickPickItems).then((quickPickItem) => {
+            if (quickPickItem) {
+                tortoiseCommand.exec(quickPickItem.action, quickPickItem.path);
+            }
+        });
+    });
+    context.subscriptions.push(disposableNeedChoose);
+
+    let disposableDropdown = vscode.commands.registerCommand('tortoise-svn ...(select path)', (uri: vscode.Uri) => {
         // exec every time on command trigger
         getQuickPickItemsFromDir(vscode.workspace.rootPath, quickPickItems => {
             // show dor or file paths
-            vscode.window.showQuickPick<QuickPickItemForPath>(quickPickItems).then((path) => {
+            vscode.window.showQuickPick<SvnQuickPickItem>(quickPickItems).then((path) => {
                 if (path) {
                     // show actions
                     actionQuickPickItems.forEach((actionQuickPickItem) => {
-                        actionQuickPickItem.description = path.label;
+                        actionQuickPickItem.description = path.path;
                     });
-                    vscode.window.showQuickPick<ActionQuickPickItem>(actionQuickPickItems).then((action) => {
+                    vscode.window.showQuickPick<any>(actionQuickPickItems).then((action) => {
                         if (action) {
-                            tortoiseCommand.exec(action.action, path.description);
+                            tortoiseCommand.exec(action.action, path.path);
                         }
                     });
                 }
             });
         });
     });
-    context.subscriptions.push(disposableNeedChoose);
+    context.subscriptions.push(disposableDropdown);
 }
 
 /**
@@ -72,10 +105,10 @@ export function activate(context: vscode.ExtensionContext) {
  * @param {Function} callback
  */
 function getQuickPickItemsFromDir(dirPath: string, callback: Function): void {
-    let quickPickItems: QuickPickItemForPath[] = [{
+    let quickPickItems: SvnQuickPickItem[] = [{
         label: '$workspace',
         description: dirPath,
-        isDir: true
+        path: dirPath
     }];
     glob('**/', { cwd: dirPath }, (err, dirPaths) => {
         if (err) throw err;
@@ -83,7 +116,7 @@ function getQuickPickItemsFromDir(dirPath: string, callback: Function): void {
             quickPickItems.push({
                 label: dir,
                 description: path.join(vscode.workspace.rootPath, dir),
-                isDir: true
+                path: dirPath
             });
         });
 
@@ -94,7 +127,7 @@ function getQuickPickItemsFromDir(dirPath: string, callback: Function): void {
                 quickPickItems.push({
                     label: file,
                     description: '',
-                    isDir: false
+                    path: file
                 });
             });
 
@@ -102,8 +135,48 @@ function getQuickPickItemsFromDir(dirPath: string, callback: Function): void {
         })
     });
 }
+
+
 // this method is called when your extension is deactivated
 export function deactivate() {
+}
+
+class UriInfo implements UriInfo {
+    constructor(uri?: vscode.Uri) {
+        let path: string;
+        if (uri) {
+            path = uri.fsPath;
+        } else {
+            path = vscode.workspace.rootPath;
+        }
+
+        let stat: fs.Stats = fs.statSync(path);
+        Object.assign<this, any>(
+            this,
+            {
+                path: path,
+                isFile: stat.isFile(),
+                isDirectory: stat.isDirectory()
+            }
+        );
+    }
+
+    public getActionQuickPickItem(): SvnQuickPickItem[] {
+        let quickPickItems: string[];
+        if (this.isFile) {
+            quickPickItems = FILE_ACTIONS;
+        } else if (this.isDirectory) {
+            quickPickItems = DIRECTORY_ACTIONS;
+        }
+        return quickPickItems.map<SvnQuickPickItem>(action => {
+            return {
+                label: 'svn ' + action,
+                description: this.path,
+                path: this.path,
+                action: action
+            }
+        });
+    }
 }
 
 class TortoiseCommand {
