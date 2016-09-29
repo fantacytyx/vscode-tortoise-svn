@@ -147,6 +147,10 @@
         {
           "command": "tortoise-svn ...",
           "group": "tortoise-svn"
+        },
+        {
+          "command": "tortoise-svn ...(select path)",
+          "group": "tortoise-svn"
         }
       ],
       "editor/context": [
@@ -181,6 +185,19 @@
           "type": "string",
           "default": "C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe",
           "description": "Specify the correct TortoiseProc path"
+        },
+        "TortoiseSVN.files.exclude": {
+          "type": "array",
+          "default": [
+            "**/.git/**",
+            "**/.svn/**",
+            "**/.hg/**",
+            "**/.DS_Store/**",
+            "**/node_modules/**",
+            "**/bower_components/**",
+            "**/sea_modules/**"
+          ],
+          "description": "配置 glob 模式以排除文件和文件夹"
         }
       }
     },
@@ -208,7 +225,7 @@
       {
         "command": "workspace tortoise-svn diff",
         "key": "alt+s d"
-      },      
+      },
       {
         "command": "file tortoise-svn add",
         "key": "alt+s a",
