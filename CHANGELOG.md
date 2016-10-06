@@ -1,3 +1,7 @@
+## Version 0.0.5
+* `select path`: support setting glob pattern to exclude files
+* `select path`: improvement performance
+
 ## Version 0.0.4
 * support apply command to the select file/directory on explorer by use context menu item `SVN ... (Select Action) `
 * add new commands for current focusing file

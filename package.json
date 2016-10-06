@@ -2,7 +2,7 @@
   "name": "tortoise-svn",
   "displayName": "TortoiseSVN",
   "description": "tortoise-svn is a simple extension for VSCode to use TortoiseSVN.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "fantasytyx",
   "author": {
     "name": "TangYaxin",
@@ -186,18 +186,12 @@
           "default": "C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe",
           "description": "Specify the correct TortoiseProc path"
         },
-        "TortoiseSVN.files.exclude": {
+        "TortoiseSVN.showPath.exclude": {
           "type": "array",
           "default": [
-            "**/.git/**",
-            "**/.svn/**",
-            "**/.hg/**",
-            "**/.DS_Store/**",
-            "**/node_modules/**",
-            "**/bower_components/**",
-            "**/sea_modules/**"
+            "**/{node_modules,bower_components}/**"
           ],
-          "description": "配置 glob 模式以排除文件和文件夹"
+          "description": "Setting  glob pattern to exclude files and folders"
         }
       }
     },

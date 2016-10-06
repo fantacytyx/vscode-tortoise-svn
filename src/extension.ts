@@ -109,8 +109,12 @@ function getQuickPickItemsFromDir(dirPath: string): Promise<SvnQuickPickItem[]> 
             description: dirPath,
             path: dirPath
         }];
-        let ignore = vscode.workspace.getConfiguration('TortoiseSVN').get('files.exclude');
-        glob('**', { cwd: dirPath, mark: true, ignore: ignore }, (err, paths) => {
+        let ignore:any = vscode.workspace.getConfiguration('TortoiseSVN').get('showPath.exclude');
+        let options:any = { cwd: dirPath, mark: true };
+        if(Object.prototype.toString.call(ignore) === '[object Array]' && ignore.length > 0){
+            options.ignore = ignore;
+        }
+        glob('**', options, (err, paths) => {
             if (err) throw err;
             paths.forEach(file => {
                 var lastSep = file.lastIndexOf('/') + 1;

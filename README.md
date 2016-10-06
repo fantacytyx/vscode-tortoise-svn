@@ -5,6 +5,7 @@ tortoise-svn is a simple extension for VSCode to use TortoiseSVN.
 ## Features
 
 tortoise-svn provides commands to open TortoiseSVN window for workspace rootPath for update, commit, log, revert, cleanup, add, diff, blame, lock and unlock. 
+
 tortoise-svn provides `dropdown` to select TortoiseSVN action and provides `dropdown` to select target dir or file.
 
 **It runs only on Windows and needs the `TortoiseSVN` and TortoiseSVN command line tools (TortoiseProc.exe).**
@@ -61,6 +62,32 @@ This extension contributes the following settings:
 
 * `TortoiseSVN.autoCloseUpdateDialog` : enable/disable auto close dialog when no errors, conflicts and merges.
 * `TortoiseSVN.tortoiseSVNProcExePath` : specify the correct `TortoiseProc.exe` path
+* `TortoiseSVN.showPath.exclude` : setting  glob pattern to exclude files and folders. exclude will disable when specify a empty array
+
+## Change Log
+### Version 0.0.5
+* `select path`: support setting glob pattern to exclude files
+* `select path`: improvement performance
+
+### Version 0.0.4
+* support apply command to the select file/directory on explorer by use context menu item `SVN ... (Select Action) `
+* add new commands for current focusing file
+* directory remove `blame` command
+* modify command name and command title
+* remove menu `tortoise-svn log in workspace` to `explorer/context` and `editor/context` 
+* improve keybindings configuration
+* some bug fixed
+
+### Version 0.0.3
+* add command `tortoise-svn...` which can select TortoiseSVN action and target dir or file
+* add menu `tortoise-svn...` to `explorer/context` and `editor/context` 
+* add `keybindings` `alt+s m`: tortoise-svn...
+
+### Version 0.0.2
+* add more menu
+
+### Version 0.0.1
+* Initial release
 
 ## Links
 
