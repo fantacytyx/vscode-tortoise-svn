@@ -2,7 +2,7 @@
   "name": "tortoise-svn",
   "displayName": "TortoiseSVN",
   "description": "tortoise-svn is a simple extension for VSCode to use TortoiseSVN.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "fantasytyx",
   "author": {
     "name": "TangYaxin",

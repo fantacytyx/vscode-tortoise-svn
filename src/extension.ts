@@ -35,6 +35,11 @@ export function activate(context: vscode.ExtensionContext) {
     // The commandId parameter must match the command field in package.json
     /* add command tortoiseSVN actions that only useful workspace(vscode.workspace.rootPath)*/
     let tortoiseCommand = new TortoiseCommand();
+    if (!tortoiseCommand.tortoiseSVNProcExePathIsExist()) {
+        vscode.window.showErrorMessage(`Current setting "TortoiseSVN.tortoiseSVNProcExePath" is invalid.Please specify a correct one, then restar VSCode.`);
+        return;
+    }
+
     DIRECTORY_ACTIONS.forEach((action) => {
         let disposable = vscode.commands.registerCommand(`workspace tortoise-svn ${action}`, () => {
             tortoiseCommand.exec(action, vscode.workspace.rootPath);
@@ -78,9 +83,9 @@ export function activate(context: vscode.ExtensionContext) {
 
     let disposableDropdown = vscode.commands.registerCommand('tortoise-svn ...(select path)', (uri: vscode.Uri) => {
         // exec every time on command trigger
-        getQuickPickItemsFromDir(vscode.workspace.rootPath).then(quickPickItems=>{
+        getQuickPickItemsFromDir(vscode.workspace.rootPath).then(quickPickItems => {
             return vscode.window.showQuickPick<SvnQuickPickItem>(quickPickItems);
-        }).then(path=>{
+        }).then(path => {
             if (!path) {
                 return;
             }
@@ -96,6 +101,7 @@ export function activate(context: vscode.ExtensionContext) {
     });
 }
 
+
 /**
  * 获取目录下的所有文件夹和文件的绝对路径
  * 
@@ -109,9 +115,9 @@ function getQuickPickItemsFromDir(dirPath: string): Promise<SvnQuickPickItem[]> 
             description: dirPath,
             path: dirPath
         }];
-        let ignore:any = vscode.workspace.getConfiguration('TortoiseSVN').get('showPath.exclude');
-        let options:any = { cwd: dirPath, mark: true };
-        if(Object.prototype.toString.call(ignore) === '[object Array]' && ignore.length > 0){
+        let ignore: any = vscode.workspace.getConfiguration('TortoiseSVN').get('showPath.exclude');
+        let options: any = { cwd: dirPath, mark: true };
+        if (Object.prototype.toString.call(ignore) === '[object Array]' && ignore.length > 0) {
             options.ignore = ignore;
         }
         glob('**', options, (err, paths) => {
@@ -181,6 +187,14 @@ class TortoiseCommand {
     private tortoiseSVNProcExePath: string;
     constructor() {
         this.tortoiseSVNProcExePath = this._getTortoiseSVNProcExePath();
+    }
+    public tortoiseSVNProcExePathIsExist(): boolean {
+        try{
+            let stat = fs.statSync(this._getTortoiseSVNProcExePath());
+            return stat.isFile();
+        }catch(err){
+            return false;
+        }        
     }
     private _getTortoiseSVNProcExePath(): string {
         return vscode.workspace.getConfiguration('TortoiseSVN').get('tortoiseSVNProcExePath').toString();

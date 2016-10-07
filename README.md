@@ -4,11 +4,16 @@ tortoise-svn is a simple extension for VSCode to use TortoiseSVN.
 
 ## Features
 
-tortoise-svn provides commands to open TortoiseSVN window for workspace rootPath for update, commit, log, revert, cleanup, add, diff, blame, lock and unlock. 
+tortoise-svn provides commands to open TortoiseSVN window for update, commit, log, revert, cleanup, add, diff, blame, lock and unlock.    
+tortoise-svn provides `dropdown` to select TortoiseSVN action.   
+Alternatively, you can select target file/directory first, then select the action.   
 
-tortoise-svn provides `dropdown` to select TortoiseSVN action and provides `dropdown` to select target dir or file.
+## Requirements
+**It runs only on Windows and needs the TortoiseSVN and TortoiseSVN command line tools.**   
 
-**It runs only on Windows and needs the `TortoiseSVN` and TortoiseSVN command line tools (TortoiseProc.exe).**
+If TortoiseSVN is not installed at `C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe`,
+please specify the correct path by setting property `TortoiseSVN.tortoiseSVNProcExePath` in user `settings.json`. 
+
 
 ### Commands
 
@@ -23,24 +28,25 @@ tortoise-svn provides `dropdown` to select TortoiseSVN action and provides `drop
 * `Workspace: SVN Lock` : open TortoiseSVN `lock` window
 * `Workspace: SVN Unlock` : open TortoiseSVN `unlock` window
 
-#### For the file which open in text editor and has focus
+#### For the active file which open in text editor and has focus
 * `File: SVN Update` : open TortoiseSVN `update` window
 * `File: SVN Commit` : open TortoiseSVN `commit` window
 * `File: SVN Log` : open TortoiseSVN `log` window
 * `File: SVN Revert` : open TortoiseSVN `revert` window
 * `File: SVN Cleanup` : open TortoiseSVN `cleanup` window
 * `File: SVN Add` : open TortoiseSVN `add` window
+* `File: SVN Blame` : open TortoiseSVN `Blame` window
 * `File: SVN Diff` : open TortoiseSVN `diff` window
 * `File: SVN Lock` : open TortoiseSVN `lock` window
 * `File: SVN Unlock` : open TortoiseSVN `unlock` window
 
 #### Others
-* SVN ... (Select Action) : show a `dropdown` to select TortoiseSVN action to execute.
-    - Apply to the current file when trigger `SVN ... (Select Action) ` command use editor context menu.   
-    - Apply to the select file/directory when trigger `SVN ... (Select Action) ` command use explorer context menu.   
-    - Apply to the workspace when trigger `SVN ... (Select Action) ` command use command panel(F1/ctrl+shift+p).   
+* `SVN ... (Select Action)` : show a `dropdown` to select TortoiseSVN action to execute.
+    - Apply to the active file when trigger this command by use explorer context menu.   
+    - Apply to the select file/directory when trigger this command by use explorer context menu.   
+    - Apply to the workspace when trigger this command by use command panel(F1/ctrl+shift+p).   
 
-* SVN ... (Select Path) : show a `dropdown` to select target `directory` or `file`,then show a new  `dropdown` to select TortoiseSVN action to execute.
+* `SVN ... (Select Path)` : show a `dropdown` to select target `directory` or `file`, then show a new `dropdown` to select TortoiseSVN action to execute.
 
 ### Keybindings
 
@@ -51,30 +57,28 @@ tortoise-svn provides `dropdown` to select TortoiseSVN action and provides `drop
 * `alt+s d` : "Workspace: SVN Diff"
 * `alt+s m` : "SVN ... (Select Path)"
 
-## Requirements
-
-If TortoiseSVN is not installed at `C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe`, specify the correct path
-by setting property `TortoiseSVN.tortoiseSVNProcExePath` in user `settings.json`. 
-
 ## Extension Settings
 
 This extension contributes the following settings:
 
 * `TortoiseSVN.autoCloseUpdateDialog` : enable/disable auto close dialog when no errors, conflicts and merges.
-* `TortoiseSVN.tortoiseSVNProcExePath` : specify the correct `TortoiseProc.exe` path
-* `TortoiseSVN.showPath.exclude` : setting  glob pattern to exclude files and folders. exclude will disable when specify a empty array
+* `TortoiseSVN.tortoiseSVNProcExePath` : specify the correct `TortoiseProc.exe` path. Need restar VSCode.
+* `TortoiseSVN.showPath.exclude` : specify `glob pattern` to exclude files and folders. exclude will disable when specify a empty array.
 
 ## Change Log
+### Version 0.0.6
+* check `TortoiseProc.exe` path. If it is invaild will show a hint
+
 ### Version 0.0.5
-* `select path`: support setting glob pattern to exclude files
-* `select path`: improvement performance
+* `select path`: support setting `glob pattern` to exclude files
+* `select path`: improve performance
 
 ### Version 0.0.4
-* support apply command to the select file/directory on explorer by use context menu item `SVN ... (Select Action) `
-* add new commands for current focusing file
-* directory remove `blame` command
-* modify command name and command title
-* remove menu `tortoise-svn log in workspace` to `explorer/context` and `editor/context` 
+* apply command to the select file/directory on explorer by use context menu item `SVN ... (Select Action) `
+* add new commands for the active file which open in text editor and has focus
+* remove `blame` command when target is directory
+* modify command name and command title, such as `tortoise-svn...` -->  `SVN ... (Select Path)`
+* remove menu `tortoise-svn log in workspace` from `explorer/context` and `editor/context` 
 * improve keybindings configuration
 * some bug fixed
 
