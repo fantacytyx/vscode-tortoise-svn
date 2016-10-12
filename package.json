@@ -2,7 +2,7 @@
   "name": "tortoise-svn",
   "displayName": "TortoiseSVN",
   "description": "tortoise-svn is a simple extension for VSCode to use TortoiseSVN.",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "publisher": "fantasytyx",
   "author": {
     "name": "TangYaxin",
@@ -24,27 +24,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:workspace tortoise-svn update",
-    "onCommand:workspace tortoise-svn commit",
-    "onCommand:workspace tortoise-svn log",
-    "onCommand:workspace tortoise-svn revert",
-    "onCommand:workspace tortoise-svn cleanup",
-    "onCommand:workspace tortoise-svn add",
-    "onCommand:workspace tortoise-svn diff",
-    "onCommand:workspace tortoise-svn lock",
-    "onCommand:workspace tortoise-svn unlock",
-    "onCommand:file tortoise-svn update",
-    "onCommand:file tortoise-svn commit",
-    "onCommand:file tortoise-svn log",
-    "onCommand:file tortoise-svn revert",
-    "onCommand:file tortoise-svn cleanup",
-    "onCommand:file tortoise-svn add",
-    "onCommand:file tortoise-svn diff",
-    "onCommand:file tortoise-svn blame",
-    "onCommand:file tortoise-svn lock",
-    "onCommand:file tortoise-svn unlock",
-    "onCommand:tortoise-svn ...",
-    "onCommand:tortoise-svn ...(select path)"
+    "*"
   ],
   "main": "./out/src/extension",
   "contributes": {
@@ -260,7 +240,6 @@
     "vscode": "^0.11.0"
   },
   "dependencies": {
-    "glob": "^7.0.6",
-    "minimatch": "^3.0.3"
+    "glob": "^7.0.6"
   }
 }

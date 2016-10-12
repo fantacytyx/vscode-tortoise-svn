@@ -189,12 +189,12 @@ class TortoiseCommand {
         this.tortoiseSVNProcExePath = this._getTortoiseSVNProcExePath();
     }
     public tortoiseSVNProcExePathIsExist(): boolean {
-        try{
+        try {
             let stat = fs.statSync(this._getTortoiseSVNProcExePath());
             return stat.isFile();
-        }catch(err){
+        } catch (err) {
             return false;
-        }        
+        }
     }
     private _getTortoiseSVNProcExePath(): string {
         return vscode.workspace.getConfiguration('TortoiseSVN').get('tortoiseSVNProcExePath').toString();
@@ -217,10 +217,20 @@ class TortoiseCommand {
         return `"${this.tortoiseSVNProcExePath}" /command:${action} /path:"${this._getTargetPath(fileUri)}" /closeonend:${closeonend}`;
     }
     exec(action: string, fileUri: string) {
-        child_process.exec(this._getCommand(action, fileUri), (error, stdout, stderr) => {
-            console.log(error);
-            console.log(stdout);
-            console.log(stderr);
+        let allFileSave;
+        // Can't revert unsaved changes.
+        if (action === "revert") {
+            allFileSave = vscode.workspace.saveAll();
+        } else {
+            allFileSave = Promise.resolve();
+        }
+
+        allFileSave.then(() => {
+            child_process.exec(this._getCommand(action, fileUri), (error, stdout, stderr) => {
+                console.log(error);
+                console.log(stdout);
+                console.log(stderr);
+            });
         });
     }
 }
