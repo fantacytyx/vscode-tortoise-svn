@@ -66,6 +66,10 @@ This extension contributes the following settings:
 * `TortoiseSVN.showPath.exclude` : specify `glob pattern` to exclude files and folders. exclude will disable when specify a empty array.
 
 ## Change Log
+### Version 0.1.1
+* when user don't set `TortoiseSVN.tortoiseSVNProcExePath`, get the `TortoiseProc.exe` path from registry 
+* postpone check `TortoiseProc.exe` path until command execution
+
 ### Version 0.0.7
 * fix can't revert unsaved changes
 * remove unused package minimatch

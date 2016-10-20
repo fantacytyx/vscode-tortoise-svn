@@ -35,10 +35,6 @@ export function activate(context: vscode.ExtensionContext) {
     // The commandId parameter must match the command field in package.json
     /* add command tortoiseSVN actions that only useful workspace(vscode.workspace.rootPath)*/
     let tortoiseCommand = new TortoiseCommand();
-    if (!tortoiseCommand.tortoiseSVNProcExePathIsExist()) {
-        vscode.window.showErrorMessage(`Current setting "TortoiseSVN.tortoiseSVNProcExePath" is invalid.Please specify a correct one, then restar VSCode.`);
-        return;
-    }
 
     DIRECTORY_ACTIONS.forEach((action) => {
         let disposable = vscode.commands.registerCommand(`workspace tortoise-svn ${action}`, () => {
@@ -190,14 +186,24 @@ class TortoiseCommand {
     }
     public tortoiseSVNProcExePathIsExist(): boolean {
         try {
-            let stat = fs.statSync(this._getTortoiseSVNProcExePath());
+            let stat = fs.statSync(this.tortoiseSVNProcExePath);
             return stat.isFile();
         } catch (err) {
             return false;
         }
     }
     private _getTortoiseSVNProcExePath(): string {
-        return vscode.workspace.getConfiguration('TortoiseSVN').get('tortoiseSVNProcExePath').toString();
+        let tortoiseSVNProcExePath = vscode.workspace.getConfiguration('TortoiseSVN').get('tortoiseSVNProcExePath').toString();
+        if(!tortoiseSVNProcExePath){
+            console.log('detect tortoiseSVNProcExePath');
+            try {
+                let result = child_process.execSync(`reg query HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseSVN /v ProcPath | find /i "ProcPath"`).toString()
+                tortoiseSVNProcExePath = `${result.match(/\w:.+\.exe/)[0]}`;
+            } catch (error) {
+                console.log(error);
+            }
+        }        
+        return tortoiseSVNProcExePath;
     }
     private _getTargetPath(fileUri: string): string {
         let path = '';
@@ -214,6 +220,7 @@ class TortoiseCommand {
     }
     private _getCommand(action: string, fileUri: string) {
         let closeonend = vscode.workspace.getConfiguration('TortoiseSVN').get('autoCloseUpdateDialog') ? 3 : 0;
+        // todo: Send line number with blame command. https://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-automation.html
         return `"${this.tortoiseSVNProcExePath}" /command:${action} /path:"${this._getTargetPath(fileUri)}" /closeonend:${closeonend}`;
     }
     exec(action: string, fileUri: string) {
@@ -227,9 +234,13 @@ class TortoiseCommand {
 
         allFileSave.then(() => {
             child_process.exec(this._getCommand(action, fileUri), (error, stdout, stderr) => {
-                console.log(error);
-                console.log(stdout);
-                console.log(stderr);
+                if (error && !this.tortoiseSVNProcExePathIsExist()) {
+                    vscode.window.showErrorMessage(`Setting "TortoiseSVN.tortoiseSVNProcExePath" is invalid. Please specify a correct one, then restar VSCode.`);
+                    
+                    console.log(error);
+                    console.log(stdout);
+                    console.log(stderr);
+                }
             });
         });
     }

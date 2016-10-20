@@ -2,7 +2,7 @@
   "name": "tortoise-svn",
   "displayName": "TortoiseSVN",
   "description": "tortoise-svn is a simple extension for VSCode to use TortoiseSVN.",
-  "version": "0.0.7",
+  "version": "0.1.1",
   "publisher": "fantasytyx",
   "author": {
     "name": "TangYaxin",
@@ -163,8 +163,8 @@
         },
         "TortoiseSVN.tortoiseSVNProcExePath": {
           "type": "string",
-          "default": "C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe",
-          "description": "Specify the correct TortoiseProc path"
+          "default": "",
+          "description": "Specify the TortoiseProc.exe path when auto detect path fail. Notice: must replace \\ to \\\\"
         },
         "TortoiseSVN.showPath.exclude": {
           "type": "array",
