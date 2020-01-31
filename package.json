@@ -66,6 +66,10 @@
         "title": "Workspace: SVN Unlock"
       },
       {
+        "command": "workspace tortoise-svn merge",
+        "title": "Workspace: SVN Merge"
+      },
+      {
         "command": "file tortoise-svn update",
         "title": "File: SVN Update"
       },

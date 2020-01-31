@@ -7,7 +7,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as glob from 'glob';
 
-const DIRECTORY_ACTIONS: string[] = ['update', 'commit', 'revert', 'cleanup', 'log', 'add', 'diff', 'lock', 'unlock'];
+const DIRECTORY_ACTIONS: string[] = ['update', 'commit', 'revert', 'cleanup', 'log', 'add', 'diff', 'lock', 'unlock', 'merge'];
 const FILE_ACTIONS: string[] = ['update', 'commit', 'revert', 'cleanup', 'log', 'add', 'blame', 'diff', 'lock', 'unlock'];
 
 interface SvnQuickPickItem extends vscode.QuickPickItem {
