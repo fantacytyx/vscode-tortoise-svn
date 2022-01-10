@@ -235,7 +235,7 @@ class TortoiseCommand {
         allFileSave.then(() => {
             child_process.exec(this._getCommand(action, fileUri), (error, stdout, stderr) => {
                 if (error && !this.tortoiseSVNProcExePathIsExist()) {
-                    vscode.window.showErrorMessage(`Setting "TortoiseSVN.tortoiseSVNProcExePath" is invalid. Please specify a correct one, then restar VSCode.`);
+                    vscode.window.showErrorMessage(`Setting "TortoiseSVN.tortoiseSVNProcExePath" is invalid. Please specify a correct one, then restart VSCode.`);
                     
                     console.log(error);
                     console.log(stdout);

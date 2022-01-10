@@ -62,7 +62,7 @@ please specify the correct path by setting property `TortoiseSVN.tortoiseSVNProc
 This extension contributes the following settings:
 
 * `TortoiseSVN.autoCloseUpdateDialog` : enable/disable auto close dialog when no errors, conflicts and merges.
-* `TortoiseSVN.tortoiseSVNProcExePath` : specify the correct `TortoiseProc.exe` path. Need restar VSCode.
+* `TortoiseSVN.tortoiseSVNProcExePath` : specify the correct `TortoiseProc.exe` path. Need restart VSCode.
 * `TortoiseSVN.showPath.exclude` : specify `glob pattern` to exclude files and folders. exclude will disable when specify a empty array.
 
 ## Change Log
